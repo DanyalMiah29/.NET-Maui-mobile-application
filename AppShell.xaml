@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!--
+    AppShell – Flyout navigation with 5 top-level destinations.
+    Uses ShellContent with FlyoutItem for the sidebar flyout.
+    Satisfies the Flyout (>=3 links) UI complexity requirement.
+-->
+<Shell
+    x:Class="RecipeVault.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:RecipeVault.Views"
+    Shell.FlyoutBehavior="Flyout"
+    FlyoutBackgroundColor="#1A1A2E"
+    Shell.ForegroundColor="Black"
+    Shell.UnselectedColor="#F0F0F0"
+    Shell.DisabledColor="#8A8A8A"
+    Title="RecipeVault">
+
+    <!-- Flyout header -->
+    <Shell.FlyoutHeader>
+        <Grid BackgroundColor="#FF6B35" HeightRequest="120" Padding="20">
+            <VerticalStackLayout VerticalOptions="Center">
+                <Label Text="🍴 RecipeVault" FontSize="22" FontAttributes="Bold" TextColor="White" />
+                <Label Text="Your personal recipe companion" FontSize="12" TextColor="WhiteSmoke" />
+            </VerticalStackLayout>
+        </Grid>
+    </Shell.FlyoutHeader>
+
+    <!-- Force white text for flyout navigation items -->
+    <Shell.ItemTemplate>
+        <DataTemplate>
+            <Grid Padding="14,10" ColumnDefinitions="26,*" ColumnSpacing="12">
+                <Image Grid.Column="0"
+                       Source="{Binding FlyoutIcon}"
+                       WidthRequest="20"
+                       HeightRequest="20"
+                       VerticalOptions="Center" />
+                <Label Grid.Column="1"
+                       Text="{Binding Title}"
+                       TextColor="White"
+                       FontSize="16"
+                       VerticalOptions="Center" />
+            </Grid>
+        </DataTemplate>
+    </Shell.ItemTemplate>
+
+    <!-- Auth pages (no flyout entries) -->
+    <ShellContent Route="login"    Shell.FlyoutItemIsVisible="False"
+                  ContentTemplate="{DataTemplate views:LoginPage}" />
+    <ShellContent Route="register" Shell.FlyoutItemIsVisible="False"
+                  ContentTemplate="{DataTemplate views:RegisterPage}" />
+
+    <!-- Home -->
+    <FlyoutItem Title="Home" Icon="recipevault_logo.svg" Route="home">
+        <ShellContent ContentTemplate="{DataTemplate views:HomePage}" />
+    </FlyoutItem>
+
+    <!-- Browse -->
+    <FlyoutItem Title="Browse Recipes" Icon="recipevault_logo.svg" Route="browse">
+        <ShellContent ContentTemplate="{DataTemplate views:RecipeBrowsePage}" />
+    </FlyoutItem>
+
+    <!-- Favourites -->
+    <FlyoutItem Title="My Favourites" Icon="recipevault_logo.svg" Route="favorites">
+        <ShellContent ContentTemplate="{DataTemplate views:FavoritesPage}" />
+    </FlyoutItem>
+
+    <!-- Meal Plan -->
+    <FlyoutItem Title="Meal Plan" Icon="recipevault_logo.svg" Route="mealplan">
+        <ShellContent ContentTemplate="{DataTemplate views:MealPlanPage}" />
+    </FlyoutItem>
+
+    <!-- Shopping List -->
+    <FlyoutItem Title="Shopping List" Icon="recipevault_logo.svg" Route="shopping">
+        <ShellContent ContentTemplate="{DataTemplate views:ShoppingListPage}" />
+    </FlyoutItem>
+
+    <!-- Profile -->
+    <FlyoutItem Title="Profile" Icon="recipevault_logo.svg" Route="profile">
+        <ShellContent ContentTemplate="{DataTemplate views:ProfilePage}" />
+    </FlyoutItem>
+
+    <!-- Flyout footer -->
+    <Shell.FlyoutFooter>
+        <Label Text="RecipeVault v1.0" FontSize="11" TextColor="#666"
+               HorizontalOptions="Center" Margin="0,12" />
+    </Shell.FlyoutFooter>
+
+</Shell>

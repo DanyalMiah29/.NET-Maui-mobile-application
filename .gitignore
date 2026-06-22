@@ -1,0 +1,12 @@
+bin/
+obj/
+.idea/
+.vs/
+*.user
+*.suo
+*.cache
+firebase-debug.log
+*.apk
+*.aab
+*.idsig
+*.keystore
